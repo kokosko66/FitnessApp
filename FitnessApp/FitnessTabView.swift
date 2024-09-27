@@ -11,7 +11,11 @@ struct FitnessTabView: View {
     @State var selectedTab = "Home"
     
     init() {
+        let appereance = UITabBarAppearance()
+        appereance.configureWithOpaqueBackground()
+        appereance.stackedLayoutAppearance.selected.iconColor = .green
         
+        UITabBar.appearance().scrollEdgeAppearance = appereance
     }
     
     var body: some View {
@@ -20,18 +24,21 @@ struct FitnessTabView: View {
                 .tag("Home")
                 .tabItem {
                     Image(systemName: "house")
+                    Text("Home")
                 }
             
             HistoricDataView()
                 .tag("Historic")
                 .tabItem {
                     Image(systemName: "chart.line.uptrend.xyaxis")
+                    Text("Progress")
                 }
             
             AccountView()
                 .tag("Account")
                 .tabItem {
                     Image(systemName: "person")
+                    Text("Account")
                 }
         }
     }
