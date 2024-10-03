@@ -13,7 +13,7 @@ struct HomeView: View {
     @State var stand: Int = 8
     
     var mockActivities = [
-        Activity(id: 0, title: "Todays steps", subtitle: "Goal: 10,000", image: "figure.walk", tintColor: .green, amount: "6,121"),
+        Activity(id: 0, title: "Todays Steps", subtitle: "Goal: 10,000", image: "figure.walk", tintColor: .green, amount: "6,121"),
         Activity(id: 1, title: "Calories", subtitle: "Goal: 600", image: "flame", tintColor: .red, amount: "250"),
         Activity(id: 2, title: "Stand", subtitle: "Goal: 8 hours", image: "figure.stand", tintColor: .blue, amount: "5 hours"),
         Activity(id: 3, title: "Stand", subtitle: "Goal: 8 hours", image: "figure.stand", tintColor: .blue, amount: "5 hours")
@@ -105,7 +105,7 @@ struct HomeView: View {
                     
                     LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 2), spacing: 20) {
                         
-                        ForEach(mockActivities, id: \.id) {activity in
+                        ForEach(mockActivities, id: \.id) { activity in
                             ActivityCard(activity: activity)
                         }
                         
