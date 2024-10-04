@@ -7,31 +7,45 @@
 
 import SwiftUI
 
+struct Workout {
+    let id: Int
+    let title: String
+    let image: String
+    let tintColor: Color
+    let duration: String
+    let date: String
+    let calories: String
+}
+
 struct WorkoutCard: View {
+    @State var workout: Workout
+    
     var body: some View {
         HStack {
-            Image(systemName: "figure.run")
+            Image(systemName: workout.image)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 40, height: 40)
-                .foregroundStyle(.green)
+                .foregroundStyle(workout.tintColor)
                 .padding()
                 .background(.gray.opacity(0.1))
                 .cornerRadius(15)
-            VStack(spacing: 11.5) {
+            VStack(spacing: 16) {
                 HStack {
-                    Text("Time running")
+                    Text(workout.title)
+                        .font(.title3)
+                        .bold()
                     
                     Spacer()
                     
-                    Text("23 mins")
+                    Text(workout.duration)
                 }
                 HStack {
-                    Text("Aug 19")
+                    Text(workout.date)
                     
                     Spacer()
                     
-                    Text("Burned: 341kcal")
+                    Text(workout.calories)
                 }
             }
         }
@@ -39,5 +53,5 @@ struct WorkoutCard: View {
 }
 
 #Preview {
-    WorkoutCard()
+    WorkoutCard(workout: Workout(id: 0, title: "Running", image: "figure.run", tintColor: .green, duration: "23 mins", date: "Aug 19", calories: "341 kcal"))
 }
