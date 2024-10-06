@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct HomeView: View {
+class HomeViewModel: ObservableObject {
+    
     @State var calories: Int = 123
     @State var active: Int = 50
     @State var stand: Int = 8
@@ -25,6 +26,11 @@ struct HomeView: View {
         Workout(id: 2, title: "Skiing", image: "figure.skiing.downhill", tintColor: .blue, duration: "4 hours", date: "Aug 10", calories: "550 kcal"),
         Workout(id: 3, title: "Football", image: "figure.indoor.soccer", tintColor: .orange, duration: "45 mins", date: "Aug 25", calories: "870 kcal")
     ]
+}
+
+struct HomeView: View {
+    
+    @StateObject var viewModel = HomeViewModel()
     
     var body: some View {
         NavigationStack {
@@ -76,12 +82,12 @@ struct HomeView: View {
                         Spacer()
                         
                         ZStack {
-                            ProgressCricleView(progress: $calories, goal: 600, color: .red)
+                            ProgressCricleView(progress: viewModel.$calories, goal: 600, color: .red)
                             
-                            ProgressCricleView(progress: $active, goal: 120, color: .green)
+                            ProgressCricleView(progress: viewModel.$active, goal: 120, color: .green)
                                 .padding(.all, 20)
                             
-                            ProgressCricleView(progress: $stand, goal: 12, color: .blue)
+                            ProgressCricleView(progress: viewModel.$stand, goal: 12, color: .blue)
                                 .padding(.all, 40)
                             
                         }
@@ -112,7 +118,7 @@ struct HomeView: View {
                     
                     LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 2), spacing: 20) {
                         
-                        ForEach(mockActivities, id: \.id) { activity in
+                        ForEach(viewModel.mockActivities, id: \.id) { activity in
                             ActivityCard(activity: activity)
                         }
                         
@@ -138,9 +144,9 @@ struct HomeView: View {
                     }
                     .padding(.horizontal)
                     
-                    LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 1), spacing: 20) {
+                    LazyVStack {
                         
-                        ForEach(mockWorkouts, id: \.id) { workout in
+                        ForEach(viewModel.mockWorkouts, id: \.id) { workout in
                             WorkoutCard(workout: workout)
                         }
                     }
