@@ -26,6 +26,13 @@ struct FitnessTabView: View {
                     Text("Progress")
                 }
             
+            TrainersWorkoutsView()
+                .tag("Trainers Workouts")
+                .tabItem {
+                    Image(systemName: "list.clipboard")
+                    Text("Trainers Workouts")
+                }
+            
             AccountView()
                 .tag("Account")
                 .tabItem {
